@@ -1,0 +1,22 @@
+{
+  "name": "swagger-pms",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.16.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zyqVizzz/swagger-pms.git"
+  },
+  "bugs": {
+    "url": "https://github.com/zyqVizzz/swagger-pms/issues"
+  },
+  "homepage": "https://github.com/zyqVizzz/swagger-pms#readme"
+}

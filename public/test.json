@@ -1,0 +1,1401 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "物业管理平台API",
+    "description": "物业管理平台API"
+  },
+  "schemes": [
+    "http"
+  ],
+  "host": "114.55.143.170:8082",
+  "basePath": "/",
+  "paths": {
+    "/account/login": {
+      "post": {
+        "tags": [
+          "账户"
+        ],
+        "summary": "登录",
+        "description": "登录平台",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "description": "ddd",
+            "required": true,
+            "schema": {
+              "required": [
+                "userName",
+                "pwd"
+              ],
+              "properties": {
+                "userName": {
+                  "type": "string"
+                },
+                "pwd": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "登录成功"
+          },
+          "410": {
+            "description": "用户名或密码错误"
+          },
+          "411": {
+            "description": "用户名不能为空"
+          }
+        }
+      }
+    },
+    "/account/logout": {
+      "get": {
+        "tags": [
+          "账户"
+        ],
+        "summary": "登出",
+        "description": "登出平台",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "登出成功"
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          }
+        ],
+
+      }
+    },
+    "/community/announcement/list/{pageNo}/{limit}": {
+      "get": {
+        "tags": [
+          "公告"
+        ],
+        "summary": "获取公告列表",
+        "description": "获取公告列表",
+        "parameters": [
+          {
+            "name": "pageNo",
+            "in": "path",
+            "description": "页码数",
+            "required": true,
+            "type": "integer",
+            "maximum": 10.0,
+            "minimum": 1.0,
+            "format": "int64"
+          },
+          {
+            "name": "limit",
+            "in": "path",
+            "description": "每页条数",
+            "required": true,
+            "type": "integer",
+            "maximum": 10.0,
+            "minimum": 1.0,
+            "format": "int64"
+          },
+          {
+            "name": "title",
+            "in": "query",
+            "description": "公告标题",
+            "type": "string"
+          },
+          {
+            "name": "status",
+            "in": "query",
+            "description": "公告状态",
+            "type": "string"
+          },
+          {
+            "name": "st",
+            "in": "query",
+            "description": "起始时间",
+            "type": "number"
+          },
+          {
+            "name": "et",
+            "in": "query",
+            "description": "结束时间",
+            "type": "number"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "公告获取成功"
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
+      }
+    },
+    "/community/announcement/add":{
+      "post": {
+        "tags": [
+          "公告"
+        ],
+        "summary": "创建公告",
+        "description": "创建公告",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "description": "new announce",
+            "required": true,
+            "schema": {
+              "required": [
+                "title",
+                "content",
+                "fenceIds",
+                "unitIds",
+                "effectiveStartTime",
+                "effectiveEndTime"
+              ],
+              "properties": {
+                "title": {
+                  "type": "string"
+                },
+                "content": {
+                  "type": "string"
+                },
+                "fenceIds": {
+                  "type": "string"
+                },
+                "unitIds": {
+                  "type": "string"
+                },
+                "effectiveStartTime": {
+                  "type": "number"
+                },
+                "effectiveEndTime": {
+                  "type": "number"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "公告新建成功"
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
+      }
+    },
+    "/community/announcement/editSave": {
+      "post": {
+        "tags": [
+          "公告"
+        ],
+        "summary": "编辑公告",
+        "description": "编辑公告",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "description": "new announce",
+            "required": true,
+            "schema": {
+              "required": [
+                "id",
+                "title",
+                "content",
+                "fenceIds",
+                "unitIds",
+                "effectiveStartTime",
+                "effectiveEndTime"
+              ],
+              "properties": {
+                "id":{
+                  "type": "string"
+                },
+                "title": {
+                  "type": "string"
+                },
+                "content": {
+                  "type": "string"
+                },
+                "fenceIds": {
+                  "type": "string"
+                },
+                "unitIds": {
+                  "type": "string"
+                },
+                "effectiveStartTime": {
+                  "type": "number"
+                },
+                "effectiveEndTime": {
+                  "type": "number"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "公告编辑成功"
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
+      }
+    },
+    "/community/announcement/{id}/delete": {
+      "post": {
+        "tags": [
+          "公告"
+        ],
+        "summary": "删除公告",
+        "description": "删除公告",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "公告Id",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "公告删除成功"
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
+      }
+    },
+    "/estate/complaint/list/{pageNo}/{limit}":{
+      "get": {
+        "tags": [
+          "投诉报修"
+        ],
+        "summary": "获取投诉/报修列表",
+        "description": "获取投诉/报修列表",
+        "parameters": [
+          {
+            "name": "pageNo",
+            "in": "path",
+            "description": "页码数",
+            "required": true,
+            "type": "integer",
+            "maximum": 10.0,
+            "minimum": 1.0,
+            "format": "int64"
+          },
+          {
+            "name": "limit",
+            "in": "path",
+            "description": "每页条数",
+            "required": true,
+            "type": "integer",
+            "maximum": 10.0,
+            "minimum": 1.0,
+            "format": "int64"
+          },
+          {
+            "name": "proposerName",
+            "in": "query",
+            "description": "投诉人姓名",
+            "type": "string"
+          },
+          {
+            "name": "proposerMobile",
+            "in": "query",
+            "description": "投诉人电话",
+            "type": "string"
+          },
+          {
+            "name": "status",
+            "in": "query",
+            "description": "处理状态：0 - 未处理，1 - 已处理",
+            "type": "string"
+          },
+          {
+            "name": "startTime",
+            "in": "query",
+            "description": "起始时间",
+            "type": "number"
+          },
+          {
+            "name": "endTime",
+            "in": "query",
+            "description": "结束时间",
+            "type": "number"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "公告获取成功"
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
+      }
+    },
+    "/estate/complaint/{id}/updateStatus/{timeStr}":{
+      "get": {
+        "tags": [
+          "投诉报修"
+        ],
+        "summary": "处理投诉/报修",
+        "description": "处理投诉/报修",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "条目id",
+            "required": true,
+            "type": "integer",
+            "maximum": 10.0,
+            "minimum": 1.0,
+            "format": "int64"
+          },
+          {
+            "name": "timeStr",
+            "in": "path",
+            "description": "当前时间",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "投诉/报修处理成功"
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
+      }
+    },
+    "/device/list/{pageNo}/{limit}":{
+      "get": {
+        "tags": [
+          "设备"
+        ],
+        "summary": "获取设备列表",
+        "description": "获取设备列表",
+        "parameters": [
+          {
+            "name": "pageNo",
+            "in": "path",
+            "description": "页码数",
+            "required": true,
+            "type": "integer",
+            "maximum": 10.0,
+            "minimum": 1.0,
+            "format": "int64"
+          },
+          {
+            "name": "limit",
+            "in": "path",
+            "description": "每页条数",
+            "required": true,
+            "type": "integer",
+            "maximum": 10.0,
+            "minimum": 1.0,
+            "format": "int64"
+          },
+          {
+            "name": "partitionId",
+            "in": "query",
+            "description": "分区Id",
+            "type": "integer"
+          },
+          {
+            "name": "blockId",
+            "in": "query",
+            "description": "楼幢Id",
+            "type": "integer"
+          },
+          {
+            "name": "unitId",
+            "in": "query",
+            "description": "单元Id",
+            "type": "integer"
+          },
+          {
+            "name": "type",
+            "in": "query",
+            "description": "设备类型：0 - 围墙机，1 - 单元机",
+            "type": "number"
+          },
+          {
+            "name": "status",
+            "in": "query",
+            "description": "设备状态：0 - 离线，1 - 在线",
+            "type": "number"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "获取设备列表成功"
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
+      }
+    },
+    "/device/{id}/{status}/change":{
+      "post": {
+        "tags": [
+          "设备"
+        ],
+        "summary": "开/关门",
+        "description": "开/关门",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "设备Id",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "name": "status",
+            "in": "path",
+            "description": "设备状态",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "开/关门成功"
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
+      }
+    },
+    "/community/resident/list/{pageNo}/{limit}":{
+      "get": {
+        "tags": [
+          "门禁"
+        ],
+        "summary": "获取住户列表",
+        "description": "获取住户列表",
+        "parameters": [
+          {
+            "name": "pageNo",
+            "in": "path",
+            "description": "页码数",
+            "required": true,
+            "type": "integer",
+            "maximum": 10.0,
+            "minimum": 1.0,
+            "format": "int64"
+          },
+          {
+            "name": "limit",
+            "in": "path",
+            "description": "每页条数",
+            "required": true,
+            "type": "integer",
+            "maximum": 10.0,
+            "minimum": 1.0,
+            "format": "int64"
+          },
+          {
+            "name": "name",
+            "in": "query",
+            "description": "住户姓名",
+            "type": "string"
+          },
+          {
+            "name": "mobile",
+            "in": "query",
+            "description": "联系方式",
+            "type": "string"
+          },
+          {
+            "name": "partitionId",
+            "in": "query",
+            "description": "分区Id",
+            "type": "integer"
+          },
+          {
+            "name": "blockId",
+            "in": "query",
+            "description": "楼幢Id",
+            "type": "integer"
+          },
+          {
+            "name": "unitId",
+            "in": "query",
+            "description": "单元Id",
+            "type": "integer"
+          },
+          {
+            "name": "roomNoId",
+            "in": "query",
+            "description": "房间Id",
+            "type": "integer"
+          },
+          {
+            "name": "userType",
+            "in": "query",
+            "description": "住户身份：0 - 住户，1 - 家人，2 - 租客",
+            "type": "number"
+          },
+          {
+            "name": "status",
+            "in": "query",
+            "description": "住户状态：0 - 正常，1 - 已过期",
+            "type": "number"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "获取住户列表成功"
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
+      }
+    },
+    "/community/resident/add":{
+      "post": {
+        "tags": [
+          "门禁"
+        ],
+        "summary": "新建住户",
+        "description": "新建住户",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "description": "住户model",
+            "required": true,
+            "schema": {
+              "required": [
+                "name",
+                "userType",
+                "mobile",
+                "partitionId",
+                "blockId",
+                "unitId",
+                "roomNoId",
+                "effectiveType",
+                "effectiveStartTime",
+                "effectiveEndTime"
+              ],
+              "properties": {
+                "name": {
+                  "type": "string"
+                },
+                "userType": {
+                  "type": "number"
+                },
+                "mobile": {
+                  "type": "string"
+                },
+                "idCard": {
+                  "type": "string"
+                },
+                "partitionId": {
+                  "type": "number"
+                },
+                "blockId": {
+                  "type": "number"
+                },
+                "unitId": {
+                  "type": "number"
+                },
+                "roomNoId": {
+                  "type": "number"
+                },
+                "effectiveType": {
+                  "type": "number"
+                },
+                "effectiveStartTime": {
+                  "type": "number"
+                },
+                "effectiveEndTime": {
+                  "type": "number"
+                },
+                "cardTypeNames": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "住户新建成功"
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
+      }
+    },
+    "/community/resident/edit":{
+      "post": {
+        "tags": [
+          "门禁"
+        ],
+        "summary": "编辑住户",
+        "description": "编辑住户",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "description": "住户model",
+            "required": true,
+            "schema": {
+              "required": [
+                "id",
+                "name",
+                "userType",
+                "mobile",
+                "partitionId",
+                "blockId",
+                "unitId",
+                "roomNoId",
+                "effectiveType",
+                "effectiveStartTime",
+                "effectiveEndTime"
+              ],
+              "properties": {
+                "id":{
+                  "type": "number"
+                },
+                "name": {
+                  "type": "string"
+                },
+                "userType": {
+                  "type": "number"
+                },
+                "mobile": {
+                  "type": "string"
+                },
+                "idCard": {
+                  "type": "string"
+                },
+                "partitionId": {
+                  "type": "number"
+                },
+                "blockId": {
+                  "type": "number"
+                },
+                "unitId": {
+                  "type": "number"
+                },
+                "roomNoId": {
+                  "type": "number"
+                },
+                "effectiveType": {
+                  "type": "number"
+                },
+                "effectiveStartTime": {
+                  "type": "number"
+                },
+                "effectiveEndTime": {
+                  "type": "number"
+                },
+                "cardTypeNames": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "住户编辑成功"
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
+      }
+    },
+    "/community/resident/{id}/delete":{
+      "post": {
+        "tags": [
+          "门禁"
+        ],
+        "summary": "删除住户",
+        "description": "删除住户",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "住户Id",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "住户删除成功"
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
+      }
+    },
+    "/public/card/list/{pageNo}/{limit}":{
+      "get": {
+        "tags": [
+          "门禁"
+        ],
+        "summary": "获取公卡列表",
+        "description": "获取公卡列表",
+        "parameters": [
+          {
+            "name": "pageNo",
+            "in": "path",
+            "description": "页码数",
+            "required": true,
+            "type": "integer",
+            "maximum": 10.0,
+            "minimum": 1.0,
+            "format": "int64"
+          },
+          {
+            "name": "limit",
+            "in": "path",
+            "description": "每页条数",
+            "required": true,
+            "type": "integer",
+            "maximum": 10.0,
+            "minimum": 1.0,
+            "format": "int64"
+          },
+          {
+            "name": "userName",
+            "in": "query",
+            "description": "人员姓名",
+            "type": "string"
+          },
+          {
+            "name": "mobile",
+            "in": "query",
+            "description": "手机号码",
+            "type": "string"
+          },
+          {
+            "name": "status",
+            "in": "query",
+            "description": "住户身份：0 - 正常，1 - 过期",
+            "type": "number"
+          },
+          {
+            "name": "userStatus",
+            "in": "query",
+            "description": "住户身份：0 - 物业人员，1 - 外部人员",
+            "type": "number"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "获取公卡列表成功"
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
+      }
+    },
+    "/public/card/add":{
+      "post": {
+        "tags": [
+          "门禁"
+        ],
+        "summary": "新建公卡",
+        "description": "新建公卡",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "description": "住户model",
+            "required": true,
+            "schema": {
+              "required": [
+                "userName",
+                "userStatus",
+                "mobile",
+                "vaildType",
+                "cardNo",
+                "fenceIds",
+                "unitIds"
+              ],
+              "properties": {
+                "userName": {
+                  "type": "string"
+                },
+                "userStatus": {
+                  "type": "number"
+                },
+                "mobile": {
+                  "type": "string"
+                },
+                "vaildType": {
+                  "type": "number"
+                },
+                "cardNo": {
+                  "type": "string"
+                },
+                "fenceIds": {
+                  "type": "string"
+                },
+                "unitIds": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "公卡新建成功"
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
+      }
+    },
+    "/public/card/{id}/delete":{
+      "post": {
+        "tags": [
+          "门禁"
+        ],
+        "summary": "删除公卡",
+        "description": "删除公卡",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "公卡Id",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "公卡删除成功"
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
+      }
+    },
+    "/public/card/{id}/detail":{
+      "post": {
+        "tags": [
+          "门禁"
+        ],
+        "summary": "获取公卡详情",
+        "description": "获取公卡详情",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "公卡Id",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "获取公卡详情成功"
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
+      }
+    },
+    "/device/isExist/{partitionId}/{unitId}":{
+      "get": {
+        "tags": [
+          "门禁"
+        ],
+        "summary": "获取门禁存在信息",
+        "description": "获取门禁存在信息",
+        "parameters": [
+          {
+            "name": "partitionId",
+            "in": "path",
+            "description": "分区Id",
+            "required": true,
+            "type": "integer",
+            "maximum": 10.0,
+            "minimum": 1.0,
+            "format": "int64"
+          },
+          {
+            "name": "unitId",
+            "in": "path",
+            "description": "单元Id",
+            "required": true,
+            "type": "integer",
+            "maximum": 10.0,
+            "minimum": 1.0,
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "获取门禁存在信息成功"
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
+      }
+    },
+    "/log/intercom/{pageNo}/{limit}":{
+      "get": {
+        "tags": [
+          "日志"
+        ],
+        "summary": "获取开门日志列表",
+        "description": "获取开门日志列表",
+        "parameters": [
+          {
+            "name": "pageNo",
+            "in": "path",
+            "description": "页码数",
+            "required": true,
+            "type": "integer",
+            "maximum": 10.0,
+            "minimum": 1.0,
+            "format": "int64"
+          },
+          {
+            "name": "limit",
+            "in": "path",
+            "description": "每页条数",
+            "required": true,
+            "type": "integer",
+            "maximum": 10.0,
+            "minimum": 1.0,
+            "format": "int64"
+          },
+          {
+            "name": "userName",
+            "in": "query",
+            "description": "人员姓名",
+            "type": "string"
+          },
+          {
+            "name": "deviceType",
+            "in": "query",
+            "description": "设备类型：0 - 围墙机，1 - 单元机",
+            "type": "number"
+          },
+          {
+            "name": "type",
+            "in": "query",
+            "description": "开门类型：0 - 呼叫，1 - 刷卡，2 - 密码，3 - 手机开门，4 - 人脸开门",
+            "type": "number"
+          },
+          {
+            "name": "st",
+            "in": "query",
+            "description": "起始时间",
+            "type": "number"
+          },
+          {
+            "name": "et",
+            "in": "query",
+            "description": "结束时间",
+            "type": "number"
+          },
+          {
+            "name": "partitionId",
+            "in": "query",
+            "description": "分区Id",
+            "type": "number"
+          },
+          {
+            "name": "blockId",
+            "in": "query",
+            "description": "楼幢Id",
+            "type": "number"
+          },
+          {
+            "name": "unitId",
+            "in": "query",
+            "description": "单元Id",
+            "type": "number"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "获取开门日志列表成功"
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
+      }
+    },
+    "/device/alarmInfo/log/list/{pageNo}/{limit}":{
+      "get": {
+        "tags": [
+          "日志"
+        ],
+        "summary": "获取防拆日志列表",
+        "description": "获取防拆日志列表",
+        "parameters": [
+          {
+            "name": "pageNo",
+            "in": "path",
+            "description": "页码数",
+            "required": true,
+            "type": "integer",
+            "maximum": 10.0,
+            "minimum": 1.0,
+            "format": "int64"
+          },
+          {
+            "name": "limit",
+            "in": "path",
+            "description": "每页条数",
+            "required": true,
+            "type": "integer",
+            "maximum": 10.0,
+            "minimum": 1.0,
+            "format": "int64"
+          },
+          {
+            "name": "st",
+            "in": "query",
+            "description": "起始时间",
+            "type": "number"
+          },
+          {
+            "name": "et",
+            "in": "query",
+            "description": "结束时间",
+            "type": "number"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "获取防拆日志列表成功"
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
+      }
+    },
+    "/lock/alarm/list/{pageNo}/{limit}":{
+      "get": {
+        "tags": [
+          "日志"
+        ],
+        "summary": "获取挟持报警日志列表",
+        "description": "获取挟持报警日志列表",
+        "parameters": [
+          {
+            "name": "pageNo",
+            "in": "path",
+            "description": "页码数",
+            "required": true,
+            "type": "integer",
+            "maximum": 10.0,
+            "minimum": 1.0,
+            "format": "int64"
+          },
+          {
+            "name": "limit",
+            "in": "path",
+            "description": "每页条数",
+            "required": true,
+            "type": "integer",
+            "maximum": 10.0,
+            "minimum": 1.0,
+            "format": "int64"
+          },
+          {
+            "name": "status",
+            "in": "query",
+            "description": "设备类型：0 - 未处理，1 - 已处理",
+            "type": "number"
+          },
+          {
+            "name": "startTime",
+            "in": "query",
+            "description": "起始时间",
+            "type": "number"
+          },
+          {
+            "name": "endTime",
+            "in": "query",
+            "description": "结束时间",
+            "type": "number"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "获取挟持报警日志列表成功"
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
+      }
+    },
+    "/lock/alarm/query/{id}":{
+      "get": {
+        "tags": [
+          "日志"
+        ],
+        "summary": "获取挟持报警日志列表",
+        "description": "获取挟持报警日志列表",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "日志id",
+            "required": true,
+            "type": "integer",
+            "maximum": 10.0,
+            "minimum": 1.0,
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "获取挟持报警日志列表成功"
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
+      }
+    },
+    "/lock/alarm/handle": {
+      "post": {
+        "tags": [
+          "日志"
+        ],
+        "summary": "处理挟持报警信息",
+        "description": "处理挟持报警信息",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "description": "报警model",
+            "required": true,
+            "schema": {
+              "required": [
+                "id"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "处理挟持报警信息成功"
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
+      }
+    },
+    "/community/partitions":{
+      "get": {
+        "tags": [
+          "位置信息"
+        ],
+        "summary": "获取分区",
+        "description": "获取分区",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "获取分区成功"
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
+      }
+    },
+    "/community/{unitId}/blocks":{
+      "get": {
+        "tags": [
+          "位置信息"
+        ],
+        "summary": "获取楼幢",
+        "description": "获取楼幢",
+        "parameters": [
+          {
+            "name": "unitId",
+            "in": "path",
+            "description": "分区id",
+            "required": true,
+            "type": "integer",
+            "maximum": 10.0,
+            "minimum": 1.0,
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "获取楼幢成功"
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
+      }
+    },
+    "/community/{blockId}/units":{
+      "get": {
+        "tags": [
+          "位置信息"
+        ],
+        "summary": "获取单元",
+        "description": "获取单元",
+        "parameters": [
+          {
+            "name": "blockId",
+            "in": "path",
+            "description": "楼幢id",
+            "required": true,
+            "type": "integer",
+            "maximum": 10.0,
+            "minimum": 1.0,
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "获取单元成功"
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
+      }
+    },
+    "/community/{unitId}/rooms":{
+      "get": {
+        "tags": [
+          "位置信息"
+        ],
+        "summary": "获取房间",
+        "description": "获取房间",
+        "parameters": [
+          {
+            "name": "unitId",
+            "in": "path",
+            "description": "单元id",
+            "required": true,
+            "type": "integer",
+            "maximum": 10.0,
+            "minimum": 1.0,
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "获取房间成功"
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
+      }
+    }
+  },
+  "securityDefinitions": {
+    "api_key": {
+      "type": "apiKey",
+      "name": "token",
+      "in": "header"
+    }
+  }
+}
